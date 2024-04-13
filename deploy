@@ -42,7 +42,7 @@ pacman --noconfirm -Sy bluez bluez-utils pulseaudio-bluetooth networkmanager cor
         man zsh nsxiv upower tmux fzf dunst nodejs aria2 \
         xorg xorg-xinit dmenu unzip python-pip tree lf ueberzug mediainfo \
 	noto-fonts-cjk noto-fonts-emoji noto-fonts libertinus-font perl-image-exiftool npm jq \
-	p7zip zsh-syntax-highlighting zsh-autosuggestions pass openssh texlive code progress linux-headers
+	p7zip zsh-syntax-highlighting zsh-autosuggestions pass openssh texlive code progress linux-headers discord
 systemctl enable NetworkManager 
 systemctl enable bluetooth 
 
@@ -79,7 +79,6 @@ sudo mount /dev/sdb1 /mnt/hd3tb
 
 cp -r /mnt/nvme0n1/backup/.mozilla .
 cp -r /mnt/nvme0n1/backup/.ssh .
-cp -r /mnt/nvme0n1/backup/.password-store .
 
 ln -s /mnt/hd3tb .
 ln -s /mnt/nvme0n1 .
@@ -87,8 +86,6 @@ ln -s /mnt/nvme0n1/Downloads .
 ln -s /mnt/hd3tb/Music .
 ln -s /mnt/nvme0n1/Documents .
 ln -s /mnt/nvme0n1/Pictures .
-
-gpg --import /mnt/nvme0n1/backup/private.gpg
 
 git clone --separate-git-dir=$HOME/.dotfiles git@github.com:rabpaulo/dots.git temparq
 rsync --recursive --exclude '.git' temparq/ $HOME/
@@ -104,19 +101,20 @@ cd '../dmenu/'
 sudo make install
 cd 
 
-nvim -c ':PackerSync'
 
 sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si cd $HOME
 
 sudo rm -f /etc/polkit-1/rules.d/90-corectrl.rules
 sudo mv $HOME/.local/90-corectrl.rules /etc/polkit-1/rules.d/90-corectrl.rules
 
-yay -S cmusfm downgrade gallery-dl-git brave-bin
+yay -S cmusfm downgrade gallery-dl-git brave-bin nvim-packer-git
 yay -Yc
+
+nvim -c ':PackerSync'
 
 cd 
 rm -rf  yay/ .cache temparq/ .dotfiles/ archinstall3.sh suckless-stuff .bash* suckless-stuff
 
-mkdir venv/
+python -m venv venv
 
 exit
