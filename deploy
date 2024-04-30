@@ -26,7 +26,7 @@ ln -sf /usr/share/zoneinfo/America/Sao_Paulo /etc/localtime
 hwclock --systohc
 echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
 locale-gen
-echo "amadeus" >> /etc/hostname
+echo "arch" >> /etc/hostname
 
 # Baixando e instalando GRUB
 pacman --noconfirm -S grub efibootmgr
@@ -37,10 +37,10 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 pacman --noconfirm -Sy bluez bluez-utils pulseaudio-bluetooth networkmanager corectrl \
         btop qbittorrent git rsync yt-dlp bc ffmpegthumbnailer neovim firefox gimp \
-        nicotine+ cmus neofetch zathura zathura-pdf-mupdf unrar keepassxc mpv \
+        nicotine+ cmus fastfetch zathura zathura-pdf-mupdf unrar keepassxc mpv \
         pulseaudio pulsemixer polkit xclip xwallpaper ufw imagemagick \
         man zsh nsxiv upower tmux fzf dunst nodejs aria2 \
-        xorg xorg-xinit dmenu unzip python-pip tree lf ueberzug mediainfo \
+        xorg xorg-xinit dmenu unzip python-pip tree lf mediainfo \
 	noto-fonts-cjk noto-fonts-emoji noto-fonts libertinus-font perl-image-exiftool npm jq \
 	p7zip zsh-syntax-highlighting zsh-autosuggestions pass openssh texlive code progress linux-headers discord
 systemctl enable NetworkManager 
@@ -107,7 +107,7 @@ sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/ya
 sudo rm -f /etc/polkit-1/rules.d/90-corectrl.rules
 sudo mv $HOME/.local/90-corectrl.rules /etc/polkit-1/rules.d/90-corectrl.rules
 
-yay -S cmusfm downgrade gallery-dl-git brave-bin nvim-packer-git
+yay -S cmusfm downgrade gallery-dl-git brave-bin nvim-packer-git ueberzugpp
 yay -Yc
 
 nvim -c ':PackerSync'
