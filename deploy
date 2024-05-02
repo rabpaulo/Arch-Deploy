@@ -79,6 +79,7 @@ sudo mount /dev/sdb1 /mnt/hd3tb
 
 cp -r /mnt/nvme0n1/backup/.mozilla .
 cp -r /mnt/nvme0n1/backup/.ssh .
+cp -r /mnt/nvme0n1/backup/.password-store .
 
 ln -s /mnt/hd3tb .
 ln -s /mnt/nvme0n1 .
