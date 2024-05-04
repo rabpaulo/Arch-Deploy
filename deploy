@@ -91,7 +91,7 @@ ln -s /mnt/nvme0n1/Pictures .
 git clone --separate-git-dir=$HOME/.dotfiles git@github.com:rabpaulo/dots.git temparq
 rsync --recursive --exclude '.git' temparq/ $HOME/
 
-git clone https://github.com/rabpaulo/suckless-stuff.git
+cd ~/nvme0n1/repos/
 cd 'suckless-stuff/dwm/' 
 sudo make install
 cd '../dwmblocks/'
