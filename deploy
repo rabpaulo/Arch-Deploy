@@ -37,7 +37,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 
 pacman --noconfirm -Sy bluez bluez-utils pulseaudio-bluetooth networkmanager corectrl \
         btop qbittorrent git rsync yt-dlp bc ffmpegthumbnailer neovim firefox gimp \
-        nicotine+ cmus fastfetch zathura zathura-pdf-mupdf unrar keepassxc mpv \
+        nicotine+ cmus neofetch zathura zathura-pdf-mupdf unrar keepassxc mpv \
         pulseaudio pulsemixer polkit xclip xwallpaper ufw imagemagick \
         man zsh nsxiv upower tmux fzf dunst nodejs aria2 \
         xorg xorg-xinit dmenu unzip python-pip tree lf mediainfo \
