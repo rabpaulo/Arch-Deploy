@@ -4,14 +4,14 @@ pacman --noconfirm -Sy archlinux-keyring
 pacman-key --init
 
 clear
-cfdisk /dev/sda
-mkfs.ext4 /dev/sda3
-mkswap /dev/sda2
-swapon /dev/sda2
-mkfs.fat -F32 /dev/sda1
-mount /dev/sda3 /mnt
+cfdisk /dev/nvme0n1
+mkfs.ext4 /dev/nvme0n1p3
+mkswap /dev/nvme0n1p2
+swapon /dev/nvme0n1p2
+mkfs.fat -F32 /dev/nvme0n1p1
+mount /dev/nvme0n1p3 /mnt
 mkdir -p /mnt/boot/efi 
-mount /dev/sda1 /mnt/boot/efi
+mount /dev/nvme0n1p1 /mnt/boot/efi
 pacstrap /mnt base base-devel linux linux-firmware sudo sed
 genfstab -U /mnt >> /mnt/etc/fstab
 sed '1,/^#part2$/d' `basename $0` > /mnt/archinstall2.sh
@@ -35,7 +35,7 @@ sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/' /etc/default/grub
 sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet"/GRUB_CMDLINE_LINUX_DEFAULT="amdgpu.ppfeaturemask=0xffffffff loglevel=3 quiet"/g' /etc/default/grub
 grub-mkconfig -o /boot/grub/grub.cfg
 
-pacman --noconfirm -Sy bluez bluez-utils pulseaudio-bluetooth networkmanager corectrl \
+pacman --noconfirm -Sy bluez bluez-utils pulseaudio-bluetooth networkmanager \
         btop qbittorrent git rsync yt-dlp bc ffmpegthumbnailer neovim firefox gimp \
         nicotine+ cmus zathura zathura-pdf-mupdf unrar mpv \
         pulseaudio pulsemixer polkit xclip xwallpaper ufw imagemagick \
@@ -46,9 +46,9 @@ pacman --noconfirm -Sy bluez bluez-utils pulseaudio-bluetooth networkmanager cor
 systemctl enable NetworkManager 
 systemctl enable bluetooth 
 
-id="$(ls -al /dev/disk/by-uuid/ | awk '/nvme0n1$/ {print $9}')"
-sudo mkdir -p /mnt/nvme0n1
-echo "UUID="$id"	/mnt/nvme0n1	ext4	defaults	0	0" >> /etc/fstab
+id="$(ls -al /dev/disk/by-uuid/ | awk '/sda$/ {print $9}')"
+sudo mkdir -p /mnt/ssd500
+echo "UUID="$id"	/mnt/ssd500	ext4	defaults	0	0" >> /etc/fstab
 
 idhd=$(ls -al /dev/disk/by-uuid/ | awk '/sdb1$/ {print $9}')
 sudo mkdir -p /mnt/hd3tb
@@ -74,24 +74,24 @@ exit
 
 #part3
 cd
-sudo mount /dev/nvme0n1 /mnt/nvme0n1
+sudo mount /dev/sda /mnt/ssd500
 sudo mount /dev/sdb1 /mnt/hd3tb
 
-cp -r /mnt/nvme0n1/backup/.mozilla .
-cp -r /mnt/nvme0n1/backup/.ssh .
-cp -r /mnt/nvme0n1/backup/.password-store .
+cp -r /mnt/ssd500/backup/.mozilla .
+cp -r /mnt/ssd500/backup/.ssh .
+cp -r /mnt/ssd500/backup/.password-store .
 
 ln -s /mnt/hd3tb .
-ln -s /mnt/nvme0n1 .
-ln -s /mnt/nvme0n1/Downloads .
+ln -s /mnt/ssd500 .
+ln -s /mnt/ssd500/Downloads .
 ln -s /mnt/hd3tb/Music .
-ln -s /mnt/nvme0n1/Documents .
-ln -s /mnt/nvme0n1/Pictures .
+ln -s /mnt/ssd500/Documents .
+ln -s /mnt/ssd500/Pictures .
 
 git clone --separate-git-dir=$HOME/.dotfiles git@github.com:rabpaulo/dots.git temparq
 rsync --recursive --exclude '.git' temparq/ $HOME/
 
-cd ~/nvme0n1/repos/
+cd ~/ssd500/repos/
 cd 'suckless-stuff/dwm/' 
 sudo make install
 cd '../dwmblocks/'
@@ -102,11 +102,7 @@ cd '../dmenu/'
 sudo make install
 cd 
 
-
 sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si cd $HOME
-
-sudo rm -f /etc/polkit-1/rules.d/90-corectrl.rules
-sudo mv $HOME/.local/90-corectrl.rules /etc/polkit-1/rules.d/90-corectrl.rules
 
 yay -S cmusfm downgrade gallery-dl-git brave-bin nvim-packer-git ueberzugpp
 yay -Yc
