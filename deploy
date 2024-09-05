@@ -3,6 +3,9 @@ sed -i "s/^#ParallelDownloads = 5$/ParallelDownloads = 10/" /etc/pacman.conf
 pacman --noconfirm -Sy archlinux-keyring
 pacman-key --init
 
+#temp
+cfdisk /dev/sda
+
 clear
 cfdisk /dev/nvme0n1
 mkfs.ext4 /dev/nvme0n1p3
