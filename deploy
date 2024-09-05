@@ -6,15 +6,19 @@ pacman-key --init
 #temp
 cfdisk /dev/sda
 
+boot="/dev/nvme0n1p1"
+swap="/dev/nvme0n1p2"
+root="/dev/nvme0n1p3"
+
 clear
 cfdisk /dev/nvme0n1
-mkfs.ext4 /dev/nvme0n1p3
-mkswap /dev/nvme0n1p2
-swapon /dev/nvme0n1p2
-mkfs.fat -F32 /dev/nvme0n1p1
-mount /dev/nvme0n1p3 /mnt
+mkfs.ext4 "$root"
+mkswap "$swap"
+swapon "$swap"
+mkfs.fat -F32 "$boot"
+mount "$root" /mnt
 mkdir -p /mnt/boot/efi 
-mount /dev/nvme0n1p1 /mnt/boot/efi
+mount "$boot" /mnt/boot/efi
 pacstrap /mnt base base-devel linux linux-firmware sudo sed
 genfstab -U /mnt >> /mnt/etc/fstab
 sed '1,/^#part2$/d' `basename $0` > /mnt/archinstall2.sh
