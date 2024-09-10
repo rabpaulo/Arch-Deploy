@@ -107,7 +107,7 @@ cd
 
 sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si cd $HOME
 
-yay -S cmusfm downgrade gallery-dl-git brave-bin nvim-packer-git ueberzugpp
+yay -S cmusfm downgrade gallery-dl-git brave-bin nvim-packer-git ueberzugpp upscayl-bin
 yay -Yc
 
 nvim -c ':PackerSync'
