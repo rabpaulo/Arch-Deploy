@@ -3,15 +3,13 @@ sed -i "s/^#ParallelDownloads = 5$/ParallelDownloads = 10/" /etc/pacman.conf
 pacman --noconfirm -Sy archlinux-keyring
 pacman-key --init
 
-#temp
-cfdisk /dev/sda
+cfdisk /dev/nvme0n1
 
-boot="/dev/nvme0n1p1"
-swap="/dev/nvme0n1p2"
-root="/dev/nvme0n1p3"
+boot="/dev/nvme0n1p5"
+swap="/dev/nvme0n1p6"
+root="/dev/nvme0n1p7"
 
 clear
-cfdisk /dev/nvme0n1
 mkfs.ext4 "$root"
 mkswap "$swap"
 swapon "$swap"
@@ -84,21 +82,19 @@ cd
 sudo mount /dev/sda /mnt/ssd500
 sudo mount /dev/sdb1 /mnt/hd3tb
 
-cp -r /mnt/ssd500/backup/.mozilla .
-cp -r /mnt/ssd500/backup/.ssh .
-cp -r /mnt/ssd500/backup/.password-store .
+cp -r /mnt/hd3tb/backup/.mozilla .
+cp -r /mnt/hd3tb/backup/.ssh .
+cp -r /mnt/hd3tb/backup/.password-store .
 
 ln -s /mnt/hd3tb .
-ln -s /mnt/ssd500 .
-ln -s /mnt/ssd500/Downloads .
+ln -s /mnt/hd3tb/Downloads .
+ln -s /mnt/hd3tb/Documents .
 ln -s /mnt/hd3tb/Music .
-ln -s /mnt/ssd500/Documents .
-ln -s /mnt/ssd500/Pictures .
 
 git clone --separate-git-dir=$HOME/.dotfiles git@github.com:rabpaulo/dots.git temparq
 rsync --recursive --exclude '.git' temparq/ $HOME/
 
-cd ~/ssd500/repos/
+cd ~/hd3tb/repos/
 cd 'suckless-stuff/dwm/' 
 sudo make install
 cd '../dwmblocks/'
