@@ -45,7 +45,7 @@ pacman --noconfirm -Sy bluez bluez-utils pulseaudio-bluetooth networkmanager \
         nicotine+ cmus zathura zathura-pdf-mupdf unrar mpv \
         pulseaudio pulsemixer polkit xclip xwallpaper ufw imagemagick \
         man zsh nsxiv upower tmux fzf dunst nodejs aria2 clipmenu \
-        xorg xorg-xinit dmenu unzip python-pip tree lf mediainfo \
+        xorg xorg-xinit dmenu unzip python-pip tree lf mediainfo libbsd\
 	    noto-fonts-cjk noto-fonts-emoji noto-fonts libertinus-font perl-image-exiftool npm jq \
 	    p7zip zsh-syntax-highlighting zsh-autosuggestions pass openssh texlive code progress linux-headers discord
 systemctl enable NetworkManager 
