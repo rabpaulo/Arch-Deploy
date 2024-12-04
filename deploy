@@ -46,7 +46,7 @@ pacman --noconfirm -Sy bluez bluez-utils pulseaudio-bluetooth networkmanager \
         pulseaudio pulsemixer polkit xclip xwallpaper ufw imagemagick \
         man zsh nsxiv upower tmux fzf dunst nodejs aria2 clipmenu \
         xorg xorg-xinit dmenu unzip python-pip tree lf mediainfo libbsd\
-	    noto-fonts-cjk noto-fonts-emoji noto-fonts libertinus-font perl-image-exiftool npm jq \
+	    noto-fonts-cjk noto-fonts-emoji noto-fonts libertinus-font perl-image-exiftool npm jq file-roller \
 	    p7zip zsh-syntax-highlighting zsh-autosuggestions pass openssh texlive code progress linux-headers discord
 systemctl enable NetworkManager 
 systemctl enable bluetooth 
@@ -87,9 +87,9 @@ cp -r /mnt/hd3tb/backup/.ssh .
 cp -r /mnt/hd3tb/backup/.password-store .
 
 ln -s /mnt/hd3tb .
-ln -s /mnt/hd3tb/Downloads .
-ln -s /mnt/hd3tb/Documents .
-ln -s /mnt/hd3tb/Music .
+ln -s /mnt/hd3tb/links/Downloads .
+ln -s /mnt/hd3tb/links/Documents .
+ln -s /mnt/hd3tb/links/Music .
 
 git clone --separate-git-dir=$HOME/.dotfiles git@github.com:rabpaulo/dots.git temparq
 rsync --recursive --exclude '.git' temparq/ $HOME/
