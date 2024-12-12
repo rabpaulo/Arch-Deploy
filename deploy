@@ -41,11 +41,12 @@ sed -i 's/GRUB_CMDLINE_LINUX_DEFAULT="loglevel=3 quiet"/GRUB_CMDLINE_LINUX_DEFAU
 grub-mkconfig -o /boot/grub/grub.cfg
 
 pacman --noconfirm -Sy bluez bluez-utils pulseaudio-bluetooth networkmanager \
-        btop qbittorrent git rsync yt-dlp bc ffmpegthumbnailer neovim firefox gimp \
-        nicotine+ cmus zathura zathura-pdf-mupdf unrar mpv \
+        btop qbittorrent nicotine+ firefox gimp obsidian \
+        git rsync yt-dlp bc ffmpegthumbnailer neovim \
+         cmus zathura zathura-pdf-mupdf unrar mpv \
         pulseaudio pulsemixer polkit xclip xwallpaper ufw imagemagick \
         man zsh nsxiv upower tmux fzf dunst nodejs aria2 clipmenu \
-        xorg xorg-xinit dmenu unzip python-pip tree lf mediainfo libbsd\
+        xorg xorg-xinit dmenu unzip python-pip lf mediainfo libbsd \
 	    noto-fonts-cjk noto-fonts-emoji noto-fonts libertinus-font perl-image-exiftool npm jq file-roller \
 	    p7zip zsh-syntax-highlighting zsh-autosuggestions pass openssh texlive code progress linux-headers discord
 systemctl enable NetworkManager 
@@ -107,7 +108,7 @@ cd
 
 sudo pacman -S --needed git base-devel && git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si cd $HOME
 
-yay -S cmusfm downgrade gallery-dl-git brave-bin nvim-packer-git ueberzugpp upscayl-bin
+yay -S cmusfm downgrade gallery-dl-git brave-bin nvim-packer-git ueberzugpp upscayl-bin firefox-nightly-bin
 yay -Yc
 
 nvim -c ':PackerSync'
